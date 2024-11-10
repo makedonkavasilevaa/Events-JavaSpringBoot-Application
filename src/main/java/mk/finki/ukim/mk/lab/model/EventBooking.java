@@ -11,5 +11,5 @@ public class EventBooking {
     String eventName;
     String attendeeName;
     String attendeeAddress;
-    Long numberOfTickets;
+    int numberOfTickets;
 }

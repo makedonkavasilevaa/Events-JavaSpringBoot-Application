@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.bootstrap;
 
 import jakarta.annotation.PostConstruct;
 import mk.finki.ukim.mk.lab.model.Event;
+import mk.finki.ukim.mk.lab.model.EventBooking;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 @Component
 public class DataHolder {
     public static List<Event> events = null;
+    public static List<EventBooking> bookings = null;
 
     @PostConstruct
     private void init() {
@@ -26,5 +28,12 @@ public class DataHolder {
         events.add(new Event("Strumica Open", "Festival", 5.4));
         events.add(new Event("Pastarmalijada", "Festival", 8.2));
         events.add(new Event("Toshe Proevski", "Concert", 10.0));
+
+        bookings = new ArrayList<>();
+        bookings.add(new EventBooking("Masks on" , "Makedonka Vasileva", "Primer", 2));
+        bookings.add(new EventBooking("Pastarmalijada" , "Makedonka Vasileva", "Primer", 2));
+        bookings.add(new EventBooking("Taksirat" , "Makedonka Vasileva", "Primer", 3));
+        bookings.add(new EventBooking("Parkce" , "Makedonka Vasileva", "Primer", 5));
+        bookings.add(new EventBooking("24" , "Makedonka Vasileva", "Primer", 5));
     }
 }

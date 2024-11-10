@@ -21,7 +21,7 @@
     <header>
         <h1>Event Booking page - Booking confirmation </h1>
     </header>
-    <table>
+    <table th:each="booking: ${bookings}">
         <tr>
             <th colspan="2">
                 Your Booking Status
@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td><b>Attendee Name </b></td>
-            <td>Petko Petkov</td>
+            <td th:text="${booking.getAttendeeName()}"></td>
         </tr>
         <tr>
             <td><b>Client IP Address</b></td>
@@ -37,13 +37,27 @@
         </tr>
         <tr>
             <td><b>Booking for Event</b></td>
-            <td>Oppenheimer</td>
+            <td th:text="${booking.getEventName()}"></td>
         </tr>
         <tr>
             <td><b>Number of tickets</b></td>
-            <td>2</td>
+            <td th:text="${booking.getNumberOfTickets()}"></td>
         </tr>
     </table>
 </section>
+
+<form method="post" th:action="@{/servlet/eventBooking}">
+
+    <label for="text" class="sr-only">Search text</label>
+    <input type="text" id="text" name="text" class="form-control" placeholder="text" required=""
+           autofocus="">
+
+<!--    <label for="numTickets" class="sr-only">Score</label>-->
+<!--    <input type="number" id="numTickets" name="numTickets" class="form-control" placeholder="Number Tickets" required=""-->
+<!--           autofocus="">-->
+
+    <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+
+</form>
 </body>
 </html>
