@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class EventBooking {
@@ -12,4 +11,11 @@ public class EventBooking {
     String attendeeName;
     String attendeeAddress;
     int numberOfTickets;
+
+    public EventBooking(String eventName, String attendeeName, String attendeeAddress, int numberOfTickets) {
+        this.eventName = eventName;
+        this.attendeeName = attendeeName;
+        this.attendeeAddress = attendeeAddress;
+        this.numberOfTickets = numberOfTickets;
+    }
 }
