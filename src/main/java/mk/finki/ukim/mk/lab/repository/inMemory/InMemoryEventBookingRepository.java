@@ -1,14 +1,13 @@
-package mk.finki.ukim.mk.lab.repository;
+package mk.finki.ukim.mk.lab.repository.inMemory;
 
 import mk.finki.ukim.mk.lab.bootstrap.DataHolder;
-import mk.finki.ukim.mk.lab.model.Event;
 import mk.finki.ukim.mk.lab.model.EventBooking;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class EventBookingRepository {
+public class InMemoryEventBookingRepository {
 
     public EventBooking save(EventBooking booking) {
         DataHolder.bookings.removeIf(e -> e.getEventName().equals(booking.getEventName()));

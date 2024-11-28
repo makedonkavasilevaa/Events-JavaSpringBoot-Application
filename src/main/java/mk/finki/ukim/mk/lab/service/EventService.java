@@ -10,5 +10,6 @@ public interface EventService {
     List<Event> searchEvents(String text);
     Event save(String name, String description, double popularityScore, Long locationId);
     Optional<Event> findById(Long id);
-    Optional<Event> deleteById(Long id);
+    void deleteById(Long id);
+    Event likeById(Long id);
 }

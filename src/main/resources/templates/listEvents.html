@@ -42,7 +42,16 @@
                                         <i class="fa fa-trash">Edit</i>
                                     </a>
                                 </th:block>
-
+                                <th:block>
+                                    <form th:action="@{'/events/like/{id}' (id=${event.getId()})}" th:method="post">
+                                        <button type="submit"
+                                                id="likeButton"
+                                                class="btn btn-sm btn-danger like-event"
+                                                onclick="this.disabled=true; this.form.submit();">
+                                            <i class="fa fa-thumbs-up">Like</i>
+                                        </button>
+                                    </form>
+                                </th:block>
                             </td>
                         </tr>
                         </tbody>
@@ -52,7 +61,7 @@
             <div class="col mb-3">
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
-                        <a href="/events/add" class="btn btn-block btn-dark add-event-btn">
+                        <a href="events/add-form" class="btn btn-block btn-dark add-event-btn">
                             Add new event
                         </a>
                     </div>

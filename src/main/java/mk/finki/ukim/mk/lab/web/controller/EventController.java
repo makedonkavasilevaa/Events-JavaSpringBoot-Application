@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/events")
 public class EventController {
 
     private final EventService eventService;
@@ -30,18 +30,20 @@ public class EventController {
         }
         model.addAttribute("bodyContent", "events");
         model.addAttribute("events", this.eventService.listAll());
-        return "master-template";
+        return "listEvents";
     }
 
-    @GetMapping("/events/add-form")
+    @GetMapping("/add-form")
     public String getAddEventPage(Model model) {
         List<Location> locations = this.locationService.findAll();
+        List<Event> events = this.eventService.listAll();
         model.addAttribute("locations", locations);
+        model.addAttribute("events", events);
         return "add-event";
     }
 
 
-    @PostMapping("/events/add")
+    @PostMapping("/add")
     public String saveEvent(@RequestParam String name,
                             @RequestParam String description,
                             @RequestParam Double popularityScore ,
@@ -50,13 +52,18 @@ public class EventController {
         return "redirect:/events";
     }
 
-    @PostMapping("events/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteEvent(@PathVariable Long id){
         this.eventService.deleteById(id);
+        return "redirect:/";
+    }
+    @PostMapping("/like/{id}")
+    public String likeEvent(@PathVariable Long id){
+        this.eventService.likeById(id);
         return "redirect:/events";
     }
 
-    @GetMapping("/events/edit/{eventId}")
+    @GetMapping("/edit/{eventId}")
     public String editEvent(@PathVariable Long eventId, Model model) {
         if (this.eventService.findById(eventId).isPresent()) {
             Event event = this.eventService.findById(eventId).get();
