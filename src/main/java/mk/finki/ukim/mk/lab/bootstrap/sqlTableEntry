@@ -1,0 +1,37 @@
+-- Insert example data into the location table
+INSERT INTO location (name, address, capacity, description)
+VALUES
+('New York City', '5th Avenue, New York, NY', '5000', 'A vibrant city known for its iconic landmarks and events'),
+('Los Angeles', 'Hollywood Blvd, Los Angeles, CA', '3000', 'The entertainment capital of the world, famous for Hollywood'),
+('Paris', 'Eiffel Tower, Paris, France', '10000', 'Romantic city known for its cultural heritage and landmarks'),
+('Tokyo', 'Shibuya, Tokyo, Japan', '2000', 'The capital city of Japan, known for technology and vibrant nightlife'),
+('London', 'Big Ben, London, UK', '8000', 'A historical city, famous for its culture and landmarks');
+
+-- Insert example data into the event table
+INSERT INTO event (name, description, popularity_score, location_id)
+VALUES
+('Music Concert', 'An amazing concert featuring top artists', 95.0, 1),  -- Refers to 'New York City'
+('Film Festival', 'International film festival showcasing new films', 90.5, 2),  -- Refers to 'Los Angeles'
+('Food Expo', 'A global food expo with exotic cuisine', 88.0, 3),  -- Refers to 'Paris'
+('Tech Conference', 'A tech conference with industry leaders', 92.5, 4),  -- Refers to 'Tokyo'
+('Art Exhibition', 'An exhibition of modern art', 85.0, 5),  -- Refers to 'London'
+('Marathon Race', 'Annual marathon race through the city streets', 80.0, 1),  -- Refers to 'New York City'
+('Fashion Week', 'High fashion runway shows and industry networking', 94.0, 2),  -- Refers to 'Los Angeles'
+('Charity Gala', 'A high-profile charity gala for fundraising', 87.0, 3),  -- Refers to 'Paris'
+('Comedy Show', 'A live comedy show featuring famous comedians', 78.0, 4),  -- Refers to 'Tokyo'
+('Theater Play', 'A drama performance by local theater troupe', 82.0, 5);  -- Refers to 'London'
+
+
+-- Insert example data into event_booking table
+INSERT INTO event_booking (event_name, attendee_name, attendee_address, number_of_tickets)
+VALUES
+('Music Concert', 'John Doe', '123 Main St, New York, NY', 2),
+('Film Festival', 'Jane Smith', '456 Oak Rd, Los Angeles, CA', 3),
+('Food Expo', 'Carlos Garcia', '789 Pine Ave, Paris, France', 1),
+('Tech Conference', 'Emma White', '101 Maple Dr, Tokyo, Japan', 5),
+('Art Exhibition', 'Mike Brown', '202 Birch Ln, London, UK', 4),
+('Marathon Race', 'David Johnson', '303 Cedar Blvd, New York, NY', 2),
+('Fashion Week', 'Sophia Davis', '404 Elm St, Los Angeles, CA', 1),
+('Charity Gala', 'Daniel Lee', '505 Walnut St, Paris, France', 6),
+('Comedy Show', 'Olivia Martinez', '606 Pinecrest Rd, Tokyo, Japan', 3),
+('Theater Play', 'Liam Robinson', '707 Oakwood Ave, London, UK', 2);
