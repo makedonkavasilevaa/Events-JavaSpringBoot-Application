@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/events")
+@RequestMapping({"/events", "/"})
 public class EventController {
 
     private final EventService eventService;

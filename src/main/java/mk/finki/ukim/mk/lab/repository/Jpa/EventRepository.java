@@ -10,7 +10,9 @@ import java.util.Optional;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
     void deleteById(Long id);
+    
+    List<Event> findAllByLocation_Id(Long locationId);
+    List<Event> findAllByNameOrDescription(String name, String description);
 
-    Optional<Object> findById(Long id);
-
+    Optional<Event> findById(Long id);
 }

@@ -1,6 +1,7 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
 import mk.finki.ukim.mk.lab.model.EventBooking;
+import mk.finki.ukim.mk.lab.repository.Jpa.EventBookingRepository;
 import mk.finki.ukim.mk.lab.repository.inMemory.InMemoryEventBookingRepository;
 import mk.finki.ukim.mk.lab.service.EventBookingService;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,15 @@ import java.util.List;
 @Service
 public class EventBookingServiceImpl implements EventBookingService {
 
-    private final InMemoryEventBookingRepository eventBookingRepository;
+//    private final InMemoryEventBookingRepository eventBookingRepository;
+//
+//    public EventBookingServiceImpl(InMemoryEventBookingRepository eventBookingRepository) {
+//        this.eventBookingRepository = eventBookingRepository;
+//    }
 
-    public EventBookingServiceImpl(InMemoryEventBookingRepository eventBookingRepository) {
+    private final EventBookingRepository eventBookingRepository;
+
+    public EventBookingServiceImpl(EventBookingRepository eventBookingRepository) {
         this.eventBookingRepository = eventBookingRepository;
     }
 
@@ -29,6 +36,7 @@ public class EventBookingServiceImpl implements EventBookingService {
 
     @Override
     public List<EventBooking> searchEvents(String text) {
-        return this.eventBookingRepository.searchEvents(text);
+//        return this.eventBookingRepository.searchEvents(text);
+        return this.eventBookingRepository.findEventBookingByAttendeeAddressOrAttendeeNameOrEventName(text, text, text);
     }
 }

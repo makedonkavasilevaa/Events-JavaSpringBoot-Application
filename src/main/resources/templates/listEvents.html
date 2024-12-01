@@ -37,10 +37,11 @@
                                     </form>
                                 </th:block>
                                 <th:block>
-                                    <a th:href="@{'/events/edit/{eventId}' (id=${event.getId()})}"
+                                    <a th:href="@{/events/edit/{eventId}(eventId=${event.getId()})}"
                                        class="btn btn-sm btn-info edit-event">
                                         <i class="fa fa-trash">Edit</i>
                                     </a>
+
                                 </th:block>
                                 <th:block>
                                     <form th:action="@{'/events/like/{id}' (id=${event.getId()})}" th:method="post">

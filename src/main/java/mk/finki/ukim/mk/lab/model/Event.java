@@ -1,13 +1,13 @@
 package mk.finki.ukim.mk.lab.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "event")
 public class Event{
 
     @Id

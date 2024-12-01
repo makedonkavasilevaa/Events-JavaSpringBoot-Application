@@ -1,6 +1,5 @@
 package mk.finki.ukim.mk.lab.service;
 
-import mk.finki.ukim.mk.lab.model.Event;
 import mk.finki.ukim.mk.lab.model.EventBooking;
 
 import java.util.List;
