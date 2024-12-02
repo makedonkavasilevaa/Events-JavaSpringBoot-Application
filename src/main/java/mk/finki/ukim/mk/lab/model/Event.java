@@ -24,10 +24,15 @@ public class Event{
     @JoinColumn(name = "location_id")
     private Location location;
 
-    public Event(String name, String description, double popularityScore, Location location) {
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    public Event(String name, String description, double popularityScore, Location location, Category category) {
         this.name = name;
         this.description = description;
         this.popularityScore = popularityScore;
         this.location = location;
+        this.category = category;
     }
 }

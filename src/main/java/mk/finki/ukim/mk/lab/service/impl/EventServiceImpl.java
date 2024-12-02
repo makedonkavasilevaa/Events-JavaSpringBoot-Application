@@ -1,7 +1,9 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
+import mk.finki.ukim.mk.lab.model.Category;
 import mk.finki.ukim.mk.lab.model.Event;
 import mk.finki.ukim.mk.lab.model.Location;
+import mk.finki.ukim.mk.lab.repository.Jpa.CategoryRepository;
 import mk.finki.ukim.mk.lab.repository.Jpa.EventRepository;
 import mk.finki.ukim.mk.lab.repository.Jpa.LocationRepository;
 import mk.finki.ukim.mk.lab.service.EventService;
@@ -16,11 +18,13 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final LocationRepository locationRepository;
 //    private final InMemoryEventRepository inMemoryEventRepository;
+    private final CategoryRepository categoryRepository;
 
-    public EventServiceImpl(EventRepository eventRepository, LocationRepository locationRepository/*, InMemoryEventRepository inMemoryEventRepository*/) {
+    public EventServiceImpl(EventRepository eventRepository, LocationRepository locationRepository, CategoryRepository categoryRepository/*, InMemoryEventRepository inMemoryEventRepository*/) {
         this.eventRepository = eventRepository;
         this.locationRepository = locationRepository;
 //        this.inMemoryEventRepository = inMemoryEventRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -36,9 +40,10 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event save(String name, String description, double popularityScore, Long locationId) {
+    public Event save(String name, String description, double popularityScore, Long locationId, Long categoryId) {
         Location location = locationRepository.findById(locationId).orElse(null);
-        Event event = new Event(name, description, popularityScore, location);
+        Category category = categoryRepository.findById(categoryId).orElse(null);
+        Event event = new Event(name, description, popularityScore, location, category);
         return this.eventRepository.save(event);
     }
 

@@ -59,6 +59,24 @@
                                placeholder="Popularity Score">
                     </div>
                     <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" class="form-control">
+                            <option th:if="${event} != null"
+                                    th:selected="${event.getCategory() != null &&
+                                event.getCategory().getId() == cat.getId()}"
+                                    th:each="cat : ${categories}"
+                                    th:value="${cat.getId()}"
+                                    th:text="${cat.getName()}">
+                            </option>
+                            <option th:if="${event} == null"
+                                    th:each="cat : ${categories}"
+                                    th:value="${cat.getId()}"
+                                    th:text="${cat.getName()}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Location</label>
                         <select name="location" class="form-control">
                             <option th:if="${event} != null"

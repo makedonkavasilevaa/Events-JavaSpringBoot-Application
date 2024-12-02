@@ -1,7 +1,10 @@
 package mk.finki.ukim.mk.lab.web.controller;
 
+import mk.finki.ukim.mk.lab.model.Category;
 import mk.finki.ukim.mk.lab.model.Event;
 import mk.finki.ukim.mk.lab.model.Location;
+import mk.finki.ukim.mk.lab.repository.Jpa.CategoryRepository;
+import mk.finki.ukim.mk.lab.service.CategoryService;
 import mk.finki.ukim.mk.lab.service.EventService;
 import mk.finki.ukim.mk.lab.service.LocationService;
 import org.springframework.stereotype.Controller;
@@ -17,10 +20,12 @@ public class EventController {
 
     private final EventService eventService;
     private final LocationService locationService;
+    private final CategoryService categoryService;
 
-    public EventController(EventService eventService, LocationService locationService) {
+    public EventController(EventService eventService, LocationService locationService, CategoryService categoryService) {
         this.eventService = eventService;
         this.locationService = locationService;
+        this.categoryService = categoryService;
     }
     @GetMapping()
     public String getEventsPage(@RequestParam(required = false) String error, Model model){
@@ -37,9 +42,22 @@ public class EventController {
     public String getAddEventPage(Model model) {
         List<Location> locations = this.locationService.findAll();
         List<Event> events = this.eventService.listAll();
+        List<Category> categories = this.categoryService.listAll();
         model.addAttribute("locations", locations);
         model.addAttribute("events", events);
+        model.addAttribute("categories", categories);
         return "add-event";
+    }
+
+    @GetMapping("/add-category")
+    public String getAddCategoryPage(Model model) {
+        List<Location> locations = this.locationService.findAll();
+        List<Event> events = this.eventService.listAll();
+        List<Category> categories = this.categoryService.listAll();
+        model.addAttribute("locations", locations);
+        model.addAttribute("events", events);
+        model.addAttribute("categories", categories);
+        return "add-category";
     }
 
 
@@ -47,8 +65,15 @@ public class EventController {
     public String saveEvent(@RequestParam String name,
                             @RequestParam String description,
                             @RequestParam Double popularityScore ,
-                            @RequestParam Long location){
-        this.eventService.save(name, description, popularityScore, location);
+                            @RequestParam Long location,
+                            @RequestParam Long category){
+        this.eventService.save(name, description, popularityScore, location, category);
+        return "redirect:/events";
+    }
+
+    @PostMapping("/addCategory")
+    public String saveEvent(@RequestParam String name){
+        this.categoryService.save(name);
         return "redirect:/events";
     }
 
