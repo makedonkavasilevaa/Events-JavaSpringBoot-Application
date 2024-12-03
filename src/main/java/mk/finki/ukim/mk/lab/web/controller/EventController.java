@@ -3,7 +3,6 @@ package mk.finki.ukim.mk.lab.web.controller;
 import mk.finki.ukim.mk.lab.model.Category;
 import mk.finki.ukim.mk.lab.model.Event;
 import mk.finki.ukim.mk.lab.model.Location;
-import mk.finki.ukim.mk.lab.repository.Jpa.CategoryRepository;
 import mk.finki.ukim.mk.lab.service.CategoryService;
 import mk.finki.ukim.mk.lab.service.EventService;
 import mk.finki.ukim.mk.lab.service.LocationService;
@@ -93,8 +92,10 @@ public class EventController {
         if (this.eventService.findById(eventId).isPresent()) {
             Event event = this.eventService.findById(eventId).get();
             List<Location> locations = this.locationService.findAll();
+            List<Category> categories = this.categoryService.listAll();
             model.addAttribute("locations", locations);
             model.addAttribute("event", event);
+            model.addAttribute("categories", categories);
             return "add-event";
         }
         return "redirect:/products?error=ProductNotFound";
