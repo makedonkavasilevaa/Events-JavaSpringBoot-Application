@@ -1,15 +1,12 @@
 package mk.finki.ukim.mk.lab.bootstrap;
 
 import jakarta.annotation.PostConstruct;
-import mk.finki.ukim.mk.lab.model.Category;
-import mk.finki.ukim.mk.lab.model.Event;
-import mk.finki.ukim.mk.lab.model.EventBooking;
-import mk.finki.ukim.mk.lab.model.Location;
-import mk.finki.ukim.mk.lab.repository.Jpa.CategoryRepository;
-import mk.finki.ukim.mk.lab.repository.Jpa.EventBookingRepository;
-import mk.finki.ukim.mk.lab.repository.Jpa.EventRepository;
-import mk.finki.ukim.mk.lab.repository.Jpa.LocationRepository;
+import mk.finki.ukim.mk.lab.model.*;
+import mk.finki.ukim.mk.lab.model.enums.Role;
+import mk.finki.ukim.mk.lab.repository.Jpa.*;
 import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,25 +18,41 @@ public class DataHolder {
 
     private final LocationRepository locationRepository;
     private final EventRepository eventRepository;
-//    private final EventBooking eventBooking;
+    private final EventBookingRepository eventBookingRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
+    private final PasswordEncoder passwordEncoder;
 
     public static List<Event> events = null;
     public static List<EventBooking> bookings = null;
     public static List<Location> locations = null;
     public static List<Category> categories = null;
-    private final EventBookingRepository eventBookingRepository;
+    public static List<Users> users = null;
 
-    public DataHolder(LocationRepository locationRepository, EventRepository eventRepository, CategoryRepository categoryRepository, EventBookingRepository eventBookingRepository) {
+    public DataHolder(LocationRepository locationRepository, EventRepository eventRepository, CategoryRepository categoryRepository, EventBookingRepository eventBookingRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.locationRepository = locationRepository;
         this.eventRepository = eventRepository;
         this.categoryRepository = categoryRepository;
         this.eventBookingRepository = eventBookingRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
     private void init() {
+
+        users = new ArrayList<>();
+
+            users.add(new Users("elena.atanasoska", passwordEncoder.encode("ea"), "Elena", "Atanasoska", Role.ROLE_USER));
+            users.add(new Users("darko.sasanski", passwordEncoder.encode("ds"), "Darko", "Sasanski", Role.ROLE_USER));
+            users.add(new Users("ana.todorovska", passwordEncoder.encode("at"), "Ana", "Todorovska", Role.ROLE_USER));
+            users.add(new Users("admin", passwordEncoder.encode("admin"), "admin", "admin", Role.ROLE_ADMIN));
+        if (userRepository.findAll().isEmpty()){
+            this.userRepository.saveAll(users);
+        }
+
+
 
         locations = new ArrayList<>();
         locations.add(new Location("Lokacija 1", "Address 1" , "100", "Description 1"));
