@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "event_booking")
+//@Table(name = "event_booking")
 public class EventBooking {
 
     @Id

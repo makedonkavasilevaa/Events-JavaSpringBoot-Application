@@ -13,11 +13,10 @@ import java.util.Collections;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "users")
+//@Table(name = "users")
 public class Users implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String username;
 
     private String password;

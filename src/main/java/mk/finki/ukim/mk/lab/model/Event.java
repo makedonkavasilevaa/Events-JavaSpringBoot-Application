@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "event")
+//@Table(name = "event")
 public class Event{
 
     @Id
